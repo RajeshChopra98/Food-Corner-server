@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const orderSChema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   shippingInfo: {
     hNo: {
       type: String,
@@ -14,6 +14,7 @@ const orderSChema = new mongoose.Schema({
       type: String,
       required: true,
     },
+
     country: {
       type: String,
       required: true,
@@ -40,7 +41,7 @@ const orderSChema = new mongoose.Schema({
       },
     },
 
-    DoublePattyBurger: {
+    vegCheeseBurger: {
       price: {
         type: Number,
         required: true,
@@ -51,7 +52,7 @@ const orderSChema = new mongoose.Schema({
       },
     },
 
-    CheeseBurgerWithFries: {
+    burgerWithFries: {
       price: {
         type: Number,
         required: true,
@@ -64,29 +65,28 @@ const orderSChema = new mongoose.Schema({
   },
 
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "User",
     required: true,
   },
 
   paymentMethod: {
-    type: String,
+    type: "String",
     enum: ["COD", "Online"],
     default: "COD",
   },
 
   paymentInfo: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.ObjectId,
     ref: "Payment",
   },
-
   paidAt: Date,
 
   itemsPrice: {
     type: Number,
     default: 0,
   },
-  taxCharges: {
+  taxPrice: {
     type: Number,
     default: 0,
   },
@@ -105,13 +105,11 @@ const orderSChema = new mongoose.Schema({
     default: "Preparing",
   },
 
-  deliveredAT : Date,
-
+  deliveredAt: Date,
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  
 });
 
-export const Order = mongoose.model("Order", orderSChema);
+export const Order = mongoose.model("Order", schema);
