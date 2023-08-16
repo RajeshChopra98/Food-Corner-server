@@ -4,6 +4,7 @@ import crypto from "crypto";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import {Payment} from "../models/Payment.js";
 
+
 export const placeOrder = async (req, res, next) => {
   try {
     const {
@@ -99,12 +100,9 @@ export const paymentVerification = async (req, res, next) => {
     
     const {razorpay_payment_id, razorpay_order_id, razorpay_signature, orderOptions} = req.body;
 
-    const signature = hmac_sha256(
-      razorpay_order_id + "|" + razorpay_payment_id,
-      process.env.RAZORPAY_API_SECRET
-    );
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
 
-    // const signature = crypto.createHmac("sha256", process.env.RAZORPAY_API_SECRET).update(body).digest("hex");
+    const signature = crypto.createHmac("sha256", process.env.RAZORPAY_API_SECRET).update(body).digest("hex");
 
 
     const isAuthentic = signature === razorpay_signature;
