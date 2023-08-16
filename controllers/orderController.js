@@ -3,7 +3,6 @@ import {instance} from "../server.js";
 import crypto from "crypto";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import {Payment} from "../models/Payment.js";
-const Razorpay = require("razorpay");
 
 export const placeOrder = async (req, res, next) => {
   try {
