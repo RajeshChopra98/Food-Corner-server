@@ -8,6 +8,7 @@ import passport from "passport";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(
     }
   }));
 
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.json());
 app.use(urlencoded({
