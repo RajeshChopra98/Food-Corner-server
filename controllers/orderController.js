@@ -72,7 +72,7 @@ export const placeOrderOnline = async (req, res, next) => {
     };
 
     const options = {
-      amount: Number(totalAmount)*100, 
+      amount: totalAmount*100, 
       currency: "INR",
     };
 
@@ -108,7 +108,7 @@ export const paymentVerification = async (req, res, next) => {
     const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const signature = crypto
-      .createHmac("sha384", process.env.RAZORPAY_API_SECRET)
+      .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
       .update(body)
       .digest("hex");
 
