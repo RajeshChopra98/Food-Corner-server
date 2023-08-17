@@ -77,7 +77,12 @@ export const placeOrderOnline = async (req, res, next) => {
     };
 
     const order = instance.orders.create(options, async (err, order) =>{
-      console.log(order);
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log(order);
+      }
     });
 
     res.status(201).json({
@@ -100,11 +105,11 @@ export const paymentVerification = async (req, res, next) => {
     
     const {razorpay_payment_id, razorpay_order_id, razorpay_signature, orderOptions} = req.body;
 
-    // `const body = razorpay_order_id + "|" + razorpay_payment_id;`
+    const body = razorpay_order_id + "|" + razorpay_payment_id;
 
     const signature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
-      .update(`${razorpay_order_id}|${razorpay_payment_id}`)
+      .createHmac("sha384", process.env.RAZORPAY_API_SECRET)
+      .update(body)
       .digest("hex");
 
 
@@ -112,8 +117,8 @@ export const paymentVerification = async (req, res, next) => {
 
     if(isAuthentic){
       const payment = await Payment.create({
-        razorpay_payment_id,
         razorpay_order_id,
+        razorpay_payment_id,
         razorpay_signature,
       });
 
