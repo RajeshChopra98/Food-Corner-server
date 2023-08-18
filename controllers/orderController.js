@@ -72,7 +72,7 @@ export const placeOrderOnline = async (req, res, next) => {
     };
 
     const options = {
-      amount: totalAmount*100, 
+      amount: Number(totalAmount)*100, 
       currency: "INR",
     };
 
