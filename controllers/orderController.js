@@ -12,7 +12,7 @@ export const placeOrder = async (req, res, next) => {
       orderItems,
       paymentMethod,
       itemsPrice,
-      taxCharges,
+      taxPrice,
       shippingCharges,
       totalAmount,
     } = req.body;
@@ -25,7 +25,7 @@ export const placeOrder = async (req, res, next) => {
       orderItems,
       paymentMethod,
       itemsPrice,
-      taxCharges,
+      taxPrice,
       shippingCharges,
       totalAmount,
     };
@@ -53,7 +53,7 @@ export const placeOrderOnline = async (req, res, next) => {
       orderItems,
       paymentMethod,
       itemsPrice,
-      taxCharges,
+      taxPrice,
       shippingCharges,
       totalAmount,
     } = req.body;
@@ -66,7 +66,7 @@ export const placeOrderOnline = async (req, res, next) => {
       orderItems,
       paymentMethod,
       itemsPrice,
-      taxCharges,
+      taxPrice,
       shippingCharges,
       totalAmount,
     };
