@@ -44,7 +44,7 @@ app.use(urlencoded({
 app.use(
   cors({
     credentials: true,
-    origin: process.env.FRONTEND_URL,
+    origin: "*",
     methods : ["GET", "POST", "PUT", "DELETE"],
   })
 );
@@ -53,7 +53,7 @@ app.use(passport.authenticate("session"));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.enable("trust proxy");
+app.set("trust proxy", 1);
 
 connectPassport();
 
